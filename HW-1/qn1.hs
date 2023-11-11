@@ -32,3 +32,8 @@ complemento c = (\e -> not (miembro c e))
 -- f) Retorna un conjunto que contiene los elementos de cada conjunto dado
 union :: Conjunto a -> Conjunto a -> Conjunto a
 union c1 c2 = (\e -> miembro c1 e || miembro c2 e)
+
+-- h) Retorna un conjunto que contiene solo los elementos que estan en los dos
+-- conjuntos proporcionados
+interseccion :: Conjunto a -> Conjunto a -> Conjunto a
+interseccion c1 c2 = (\e -> miembro c1 e && miembro c2 e)
