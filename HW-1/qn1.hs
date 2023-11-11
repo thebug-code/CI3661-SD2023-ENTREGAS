@@ -18,3 +18,8 @@ vacio = (\e -> False)
 -- c) Retorna un conjunto que contiene unicamnete al elemento dado
 singleton :: (Eq a) => a -> Conjunto a
 singleton e = (\x -> x == e)
+
+-- d) Retorna un conjunto que contiene todos los elementos de la lista dada
+desdeLista :: (Eq a) => [a] -> Conjunto a
+desdeLista [] = vacio
+desdeLista (x:xs) = (\e -> e == x || miembro (desdeLista xs) e)
