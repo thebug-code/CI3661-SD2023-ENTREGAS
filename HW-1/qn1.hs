@@ -14,3 +14,7 @@ miembro f e = f e
 -- b) Retorna el conjunto vacio
 vacio :: Conjunto a
 vacio = (\e -> False)
+
+-- c) Retorna un conjunto que contiene unicamnete al elemento dado
+singleton :: (Eq a) => a -> Conjunto a
+singleton e = (\x -> x == e)
