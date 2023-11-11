@@ -34,13 +34,17 @@ union :: Conjunto a -> Conjunto a -> Conjunto a
 union c1 c2 = (\e -> miembro c1 e || miembro c2 e)
 
 -- g) Retorna un conjunto que contiene solo los elementos que estan en los dos
--- conjuntos proporcionados
+--   conjuntos proporcionados
 interseccion :: Conjunto a -> Conjunto a -> Conjunto a
 interseccion c1 c2 = (\e -> miembro c1 e && miembro c2 e)
 
 -- h) Retorna un conjunto que contiene los elementos del primer conjunto dado,
--- que no estan en el segundo
+--   que no estan en el segundo
 diferencia :: Conjunto a -> Conjunto a -> Conjunto a
 diferencia c1 c2 = (\e -> miembro c1 e && not (miembro c2 e))
 
+-- i) Dada una funcion f y un conjunto A, devuelva un conjunto B tal que A es
+--   el resultado de aplicar f a todos los elementos de B
+transformar :: (b -> a) -> Conjunto a -> Conjunto b
+transformar f c = (\e -> c (f e))
 
