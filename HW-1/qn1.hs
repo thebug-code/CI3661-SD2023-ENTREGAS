@@ -1,9 +1,5 @@
--- Tipo conjunto de elementos
+-- Tipo conjunto definido como un predicado sobre un tipo dado
 type Conjunto a = a -> Bool
-
--- Conjunto de numeros enteros pares
-pares :: Conjunto Int
-pares = (\num -> even num)
 
 -- Funciones
 
