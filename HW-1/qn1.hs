@@ -28,3 +28,7 @@ desdeLista (x:xs) = (\e -> e == x || miembro (desdeLista xs) e)
 --   en el conjunto dado (del mismo tipo)
 complemento :: Conjunto a -> a -> Bool
 complemento c = (\e -> not (miembro c e))
+
+-- f) Retorna un conjunto que contiene los elementos de cada conjunto dado
+union :: Conjunto a -> Conjunto a -> Conjunto a
+union c1 c2 = (\e -> miembro c1 e || miembro c2 e)
