@@ -23,3 +23,8 @@ singleton e = (\x -> x == e)
 desdeLista :: (Eq a) => [a] -> Conjunto a
 desdeLista [] = vacio
 desdeLista (x:xs) = (\e -> e == x || miembro (desdeLista xs) e)
+
+-- e) Retorna un conjunto que contiene unicamente todos los elementos que no estan
+--   en el conjunto dado (del mismo tipo)
+complemento :: Conjunto a -> a -> Bool
+complemento c = (\e -> not (miembro c e))
