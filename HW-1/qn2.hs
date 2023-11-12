@@ -3,12 +3,18 @@ data ArbolMB a = Vacio
                | RamaM a (ArbolMB a)
                | RamaB a (ArbolMB a) (ArbolMB a)
 
--- Constructores de datos
+-- Constructores de datos (solo tipos)
 vacio :: ArbolMB a
-vacio = Vacio
 
 ramaM :: a -> ArbolMB a -> ArbolMB a
-ramaM x a = RamaM x a
 
 ramaB :: a -> ArbolMB a -> ArbolMB a -> ArbolMB a
-ramaB x a b = RamaB x a b
+
+-- Transforma valores de tipo (ArbolMB a) en algun otro tipo b.
+-- Se supone que cada argumento de tipo (ArbolMB a) ya ha sido
+-- transformado a b
+transformarRamaM :: a -> b -> b
+
+transformarRamaB :: a -> b -> b -> b
+
+trnasformarVacio :: b
