@@ -18,3 +18,15 @@ transformarRamaM :: a -> b -> b
 transformarRamaB :: a -> b -> b -> b
 
 trnasformarVacio :: b
+
+-- Funcion transformadora
+plegarArbolMB :: (b) 
+              -> (a -> b -> b)
+              -> (a -> b -> b -> b)
+              -> ArbolMB a
+              -> b
+plegarArbolMB transVacio transRamaM transRamaB = plegar
+  where
+    plegar Vacio = transVacio
+    plegar (RamaM x y) = transRamaM x (plegar y)
+    plegar (RamaB x y z) = transRamaB x (plegar y) (plegar z)
