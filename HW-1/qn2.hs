@@ -17,7 +17,7 @@ transformarRamaM :: a -> b -> b
 
 transformarRamaB :: a -> b -> b -> b
 
-trnasformarVacio :: b
+transformarVacio :: b
 
 -- Funcion transformadora
 plegarArbolMB :: (b) 
@@ -30,3 +30,12 @@ plegarArbolMB transVacio transRamaM transRamaB = plegar
     plegar Vacio = transVacio
     plegar (RamaM x y) = transRamaM x (plegar y)
     plegar (RamaB x y z) = transRamaB x (plegar y) (plegar z)
+
+-- Dado un valor de tipo (Num a) => ArbolMB a calcula y retorna la 
+-- suma de todos datos almacenados en el tipo
+sumarArbolMB :: (Num a) => ArbolMB a -> a
+sumarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
+  where
+    transVacio = 0
+    transRamaM x y = x + y
+    transRamaB x y z = x + y + z
