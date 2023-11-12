@@ -39,3 +39,13 @@ sumarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
     transVacio = 0
     transRamaM x y = x + y
     transRamaB x y z = x + y + z
+
+-- Dado un valor de tipo ArbolMB a calcula y retorna una sola lista
+-- con todos los elementos contenidos en la estructura (en el orden
+-- in-order)
+aplanarArbolMB :: ArbolMB a -> [a]
+aplanarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
+  where
+    transVacio = []
+    transRamaM x y = y ++ [x]
+    transRamaB x y z = y ++ [x] ++ z
