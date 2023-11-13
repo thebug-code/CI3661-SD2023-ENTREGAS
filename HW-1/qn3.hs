@@ -35,3 +35,10 @@ newtype Secuencial s a = Secuencial (s -> (a,s))
 -- (>>=) :: Secuencial s a -> (a -> Secuencial s b) -> Secuencial s b
 -- (>>) :: Secuencial s a -> Secuencial s b -> Secuencial s b
 -- fail :: String -> Secuencial s a
+
+-- c) Implemente la funcion return de tal forma que inyecte el argumento pasado como argumento, dejando el
+-- estado inicial intacto. Esto es, dado un estado inicial, el resultado debe ser el argumento pasado junto al
+-- estado inicial sin cambios
+instance Monad (Secuencial s) where
+  return :: a -> Secuencial s a
+  return a = Secuencial $ \s -> (s, a)
