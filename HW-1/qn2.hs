@@ -4,20 +4,20 @@ data ArbolMB a = Vacio
                | RamaB a (ArbolMB a) (ArbolMB a)
 
 -- a) Constructores de datos (solo tipos)
-vacio :: ArbolMB a
-
-ramaM :: a -> ArbolMB a -> ArbolMB a
-
-ramaB :: a -> ArbolMB a -> ArbolMB a -> ArbolMB a
-
---b) Transforma valores de tipo (ArbolMB a) en algun otro tipo b.
--- Se supone que cada argumento de tipo (ArbolMB a) ya ha sido
--- transformado a b
-transformarRamaM :: a -> b -> b
-
-transformarRamaB :: a -> b -> b -> b
-
-transformarVacio :: b
+--vacio :: ArbolMB a
+--
+--ramaM :: a -> ArbolMB a -> ArbolMB a
+--
+--ramaB :: a -> ArbolMB a -> ArbolMB a -> ArbolMB a
+--
+----b) Transforma valores de tipo (ArbolMB a) en algun otro tipo b.
+---- Se supone que cada argumento de tipo (ArbolMB a) ya ha sido
+---- transformado a b
+--transformarRamaM :: a -> b -> b
+--
+--transformarRamaB :: a -> b -> b -> b
+--
+--transformarVacio :: b
 
 -- c) Funcion transformadora
 plegarArbolMB :: (b) 
@@ -60,15 +60,15 @@ analizarArbolMB :: (Ord a) => ArbolMB a -> Maybe (a, a, Bool)
 analizarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
   where
     transVacio = Nothing
-    transRamaM v x = Just (v, v, True)
-    transRamaB v x y = do
-      (lmin, lmax, isSortedLeft) <- x
-      (rmin, rmax, isSortedRight) <- y
-      let xmin = minimum [v, lmin, rmin]
-          xmax = maximum [v, lmax, rmax]
-          isSorted = isSortedLeft && isSortedRight && (v >= lmax) && (v <= rmin)
-      return (xmin, xmax, isSorted)
-
+    transRamaM = \x y -> case y of
+      Nothing -> Just (x, x, True)
+      Just (ymin, ymax, isSorted) -> Just (min x ymin, max x ymax, isSorted && x >= ymin)
+    transRamaB = \x y z -> case (y, z) of
+      (Nothing, Nothing) -> Just (x, x, True)
+      (Nothing, Just (zmin, zmax, isSorted)) -> Just (min x zmin, max x zmax, isSorted && x <= zmin)
+      (Just (ymin, ymax, isSorted), Nothing) -> Just (min x ymin, max x ymax, isSorted && x >= ymin)
+      (Just (ymin, ymax, isSorted1), Just (zmin, zmax, isSorted2)) -> Just (min x (min ymin zmin), max x (max ymax zmax), isSorted1 && isSorted2 && x >= ymin && x <= zmin)
+      
 -- g) Para un tipo de datos mas general Gen a, con n constructores diferentes.
 -- Si se quisiera crear una funcion plegarGen, con un comportamiento similar 
 -- al de plegarArbolMB, la funcion deberia tomar como argumentos una funcion
@@ -82,6 +82,8 @@ main = do
   let arbol2 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 (RamaM 7 Vacio) (RamaM 14 Vacio))
   print $ sumarArbolMB arbol
   print $ aplanarArbolMB arbol
---  print $ analizarArbolMB arbol1
---  print $ analizarArbolMB arbol2
---  print $ aplanarArbolMB arbol2
+  print $ aplanarArbolMB arbol1
+  print $ aplanarArbolMB arbol2
+  print $ analizarArbolMB arbol
+  print $ analizarArbolMB arbol1
+  print $ analizarArbolMB arbol2
