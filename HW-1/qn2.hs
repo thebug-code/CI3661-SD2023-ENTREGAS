@@ -47,8 +47,8 @@ aplanarArbolMB :: ArbolMB a -> [a]
 aplanarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
   where
     transVacio = []
-    transRamaM x y = y ++ [x]
-    transRamaB x y z = y ++ [x] ++ z
+    transRamaM = \x y -> [x] ++ y
+    transRamaB = \x y z -> y ++ [x] ++ z
 
 -- f) Dado un valor de tipo (Ord a) => ArbolMB a calcula y retorna
 -- posiblemente una tupla con 3 elementos. El primero es el minimo
@@ -76,12 +76,12 @@ analizarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
 -- desea plegar.
 
 -- Test
---main = do
---  let arbol = RamaB 5 (RamaB 3 (RamaB 2 Vacio Vacio) (RamaB 4 Vacio Vacio)) (RamaB 7 (RamaB 6 Vacio Vacio) (RamaB 8 Vacio Vacio))
---  let arbol1 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 Vacio (RamaB 14 (RamaM 13 Vacio) Vacio))
---  let arbol2 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 (RamaM 7 Vacio) (RamaM 14 Vacio))
---  print $ sumarArbolMB arbol
---  print $ aplanarArbolMB arbol
+main = do
+  let arbol = RamaB 5 (RamaB 3 (RamaB 2 Vacio Vacio) (RamaB 4 Vacio Vacio)) (RamaB 7 (RamaB 6 Vacio Vacio) (RamaB 8 Vacio Vacio))
+  let arbol1 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 Vacio (RamaB 14 (RamaM 13 Vacio) Vacio))
+  let arbol2 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 (RamaM 7 Vacio) (RamaM 14 Vacio))
+  print $ sumarArbolMB arbol
+  print $ aplanarArbolMB arbol
 --  print $ analizarArbolMB arbol1
 --  print $ analizarArbolMB arbol2
 --  print $ aplanarArbolMB arbol2
