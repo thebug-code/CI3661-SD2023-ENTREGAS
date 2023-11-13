@@ -21,7 +21,6 @@ newtype Secuencial s a = Secuencial (s -> (a,s))
 --  print $ runState stateIntString 0
 --  print $ runSecuencial stateIntString' 0
 
-
 -- Queremos que nuestro tipo sea un monad, por lo que haremos una instancia para el
 -- instance Monad (Secuencial s) where ...
 
@@ -30,3 +29,9 @@ newtype Secuencial s a = Secuencial (s -> (a,s))
 -- y genera un tipo concreto) y el tipo de Monad es * -> * (toma un parámetro de tipo y genera un
 -- tipo concreto). Al agregar el parámetro de tipo 's' a Secuencial, hacemos que el tipo de Secuencial
 -- sea * -> * y por lo tanto, sea compatible con el tipo de Monad.
+
+-- b) Diga las firmas para las funciones return, >>=, >> y fail para el caso especial del monad (Secuencial s)
+-- return :: a -> Secuencial s a
+-- (>>=) :: Secuencial s a -> (a -> Secuencial s b) -> Secuencial s b
+-- (>>) :: Secuencial s a -> Secuencial s b -> Secuencial s b
+-- fail :: String -> Secuencial s a
