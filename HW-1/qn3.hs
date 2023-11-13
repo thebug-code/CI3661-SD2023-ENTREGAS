@@ -40,5 +40,11 @@ newtype Secuencial s a = Secuencial (s -> (a,s))
 -- estado inicial intacto. Esto es, dado un estado inicial, el resultado debe ser el argumento pasado junto al
 -- estado inicial sin cambios
 instance Monad (Secuencial s) where
-  return :: a -> Secuencial s a
-  return a = Secuencial $ \s -> (s, a)
+  return a = Secuencial $ \estadoInicial -> (a, estadoInicial)
+
+-- d) Complete la implementacion de la funcion >>= que se da a continuacion:
+  (Secuencial programa) >>= transformador =
+    Secuencial $ \estadoInicial ->
+      let (resultado, nuevoEstado) = programa estadoInicial
+        (Secuencial nuevoPrograma) = transformador resultado
+      in nuevoPrograma nuevoEstado
