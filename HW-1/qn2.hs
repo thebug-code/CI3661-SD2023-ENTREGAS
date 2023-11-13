@@ -4,20 +4,20 @@ data ArbolMB a = Vacio
                | RamaB a (ArbolMB a) (ArbolMB a)
 
 -- Constructores de datos (solo tipos)
-vacio :: ArbolMB a
-
-ramaM :: a -> ArbolMB a -> ArbolMB a
-
-ramaB :: a -> ArbolMB a -> ArbolMB a -> ArbolMB a
-
--- Transforma valores de tipo (ArbolMB a) en algun otro tipo b.
--- Se supone que cada argumento de tipo (ArbolMB a) ya ha sido
--- transformado a b
-transformarRamaM :: a -> b -> b
-
-transformarRamaB :: a -> b -> b -> b
-
-transformarVacio :: b
+--vacio :: ArbolMB a
+--
+--ramaM :: a -> ArbolMB a -> ArbolMB a
+--
+--ramaB :: a -> ArbolMB a -> ArbolMB a -> ArbolMB a
+--
+---- Transforma valores de tipo (ArbolMB a) en algun otro tipo b.
+---- Se supone que cada argumento de tipo (ArbolMB a) ya ha sido
+---- transformado a b
+--transformarRamaM :: a -> b -> b
+--
+--transformarRamaB :: a -> b -> b -> b
+--
+--transformarVacio :: b
 
 -- Funcion transformadora
 plegarArbolMB :: (b) 
@@ -49,3 +49,34 @@ aplanarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
     transVacio = []
     transRamaM x y = y ++ [x]
     transRamaB x y z = y ++ [x] ++ z
+
+--  Dado un valor de tipo (Ord a) => ArbolMB a calcula y retorna
+--  posiblemente una tupla con 3 elementos. El primero es el minimo
+--  elemento presente en la estructura, el segundo es el maximo y el
+--  tercero es un booleano que es cierto si y solo si la lista que
+--  resultaria de llamar a la funcion aplanarArbolMB estaria ordenada
+--  de menor a mayor (esto es, que sea un arbol de busqueda)
+analizarArbolMB :: (Ord a) => ArbolMB a -> Maybe (a, a, Bool)
+analizarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
+  where
+    transVacio = Nothing
+    transRamaM v x = Just (v, v, True)
+    transRamaB v x y = do
+      (lmin, lmax, isSortedLeft) <- x
+      (rmin, rmax, isSortedRight) <- y
+      let xmin = minimum [v, lmin, rmin]
+          xmax = maximum [v, lmax, rmax]
+          isSorted = isSortedLeft && isSortedRight && (v >= lmax) && (v <= rmin)
+      return (xmin, xmax, isSorted)
+
+    
+-- Test
+--main = do
+--  let arbol = RamaB 5 (RamaB 3 (RamaB 2 Vacio Vacio) (RamaB 4 Vacio Vacio)) (RamaB 7 (RamaB 6 Vacio Vacio) (RamaB 8 Vacio Vacio))
+--  let arbol1 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 Vacio (RamaB 14 (RamaM 13 Vacio) Vacio))
+--  let arbol2 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 (RamaM 7 Vacio) (RamaM 14 Vacio))
+--  print $ sumarArbolMB arbol
+--  print $ aplanarArbolMB arbol
+--  print $ analizarArbolMB arbol1
+--  print $ analizarArbolMB arbol2
+--  print $ aplanarArbolMB arbol2
