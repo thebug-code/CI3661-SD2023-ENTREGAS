@@ -37,8 +37,8 @@ sumarArbolMB :: (Num a) => ArbolMB a -> a
 sumarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
   where
     transVacio = 0
-    transRamaM x y = x + y
-    transRamaB x y z = x + y + z
+    transRamaM = \x y -> x + y
+    transRamaB = \x y z -> x + y + z
 
 -- e) Dado un valor de tipo ArbolMB a calcula y retorna una sola lista
 -- con todos los elementos contenidos en la estructura (en el orden
