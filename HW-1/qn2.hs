@@ -4,20 +4,20 @@ data ArbolMB a = Vacio
                | RamaB a (ArbolMB a) (ArbolMB a)
 
 -- a) Constructores de datos (solo tipos)
---vacio :: ArbolMB a
---
---ramaM :: a -> ArbolMB a -> ArbolMB a
---
---ramaB :: a -> ArbolMB a -> ArbolMB a -> ArbolMB a
---
-----b) Transforma valores de tipo (ArbolMB a) en algun otro tipo b.
----- Se supone que cada argumento de tipo (ArbolMB a) ya ha sido
----- transformado a b
---transformarRamaM :: a -> b -> b
---
---transformarRamaB :: a -> b -> b -> b
---
---transformarVacio :: b
+vacio :: ArbolMB a
+
+ramaM :: a -> ArbolMB a -> ArbolMB a
+
+ramaB :: a -> ArbolMB a -> ArbolMB a -> ArbolMB a
+
+--b) Transforma valores de tipo (ArbolMB a) en algun otro tipo b.
+-- Se supone que cada argumento de tipo (ArbolMB a) ya ha sido
+-- transformado a b
+transformarRamaM :: a -> b -> b
+
+transformarRamaB :: a -> b -> b -> b
+
+transformarVacio :: b
 
 -- c) Funcion transformadora
 plegarArbolMB :: (b) 
@@ -75,15 +75,19 @@ analizarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
 -- por cada uno de los n constructores, demás del valor de tipo Gen a que se
 -- desea plegar.
 
+-- h) Para el caso especial donde hay dos contructores data [a] = (:) a [a] | []. La funcion
+-- predefinida en el preludio de Haskell que tiene una firma y comportamiento similar a
+-- al del implementar una funcion de plegado para el tipo propuesto es foldr: (a -> b -> b) -> b -> [a] -> b
+
 -- Test
-main = do
-  let arbol = RamaB 5 (RamaB 3 (RamaB 2 Vacio Vacio) (RamaB 4 Vacio Vacio)) (RamaB 7 (RamaB 6 Vacio Vacio) (RamaB 8 Vacio Vacio))
-  let arbol1 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 Vacio (RamaB 14 (RamaM 13 Vacio) Vacio))
-  let arbol2 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 (RamaM 7 Vacio) (RamaM 14 Vacio))
-  print $ sumarArbolMB arbol
-  print $ aplanarArbolMB arbol
-  print $ aplanarArbolMB arbol1
-  print $ aplanarArbolMB arbol2
-  print $ analizarArbolMB arbol
-  print $ analizarArbolMB arbol1
-  print $ analizarArbolMB arbol2
+--main = do
+--  let arbol = RamaB 5 (RamaB 3 (RamaB 2 Vacio Vacio) (RamaB 4 Vacio Vacio)) (RamaB 7 (RamaB 6 Vacio Vacio) (RamaB 8 Vacio Vacio))
+--  let arbol1 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 Vacio (RamaB 14 (RamaM 13 Vacio) Vacio))
+--  let arbol2 = RamaB 8 (RamaB 3 (RamaM 1 Vacio) (RamaB 6 (RamaM 4 Vacio) (RamaM 7 Vacio))) (RamaB 10 (RamaM 7 Vacio) (RamaM 14 Vacio))
+--  print $ sumarArbolMB arbol
+--  print $ aplanarArbolMB arbol
+--  print $ aplanarArbolMB arbol1
+--  print $ aplanarArbolMB arbol2
+--  print $ analizarArbolMB arbol
+--  print $ analizarArbolMB arbol1
+--  print $ analizarArbolMB arbol2
