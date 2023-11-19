@@ -3,12 +3,7 @@ data ArbolMB a = Vacio
                | RamaM a (ArbolMB a)
                | RamaB a (ArbolMB a) (ArbolMB a)
 
--- a) Constructores de datos (solo tipos)
-vacio :: ArbolMB a
-
-ramaM :: a -> ArbolMB a -> ArbolMB a
-
-ramaB :: a -> ArbolMB a -> ArbolMB a -> ArbolMB a
+-- a) Constructores de datos (solo tipos) -> en el informe
 
 --b) Transforma valores de tipo (ArbolMB a) en algun otro tipo b.
 -- Se supone que cada argumento de tipo (ArbolMB a) ya ha sido
