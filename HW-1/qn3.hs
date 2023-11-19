@@ -26,11 +26,7 @@ newtype Secuencial s a = Secuencial (s -> (a,s))
 
 -- a) en el informe
 
--- b) Diga las firmas para las funciones return, >>=, >> y fail para el caso especial del monad (Secuencial s)
--- return :: a -> Secuencial s a
--- (>>=) :: Secuencial s a -> (a -> Secuencial s b) -> Secuencial s b
--- (>>) :: Secuencial s a -> Secuencial s b -> Secuencial s b
--- fail :: String -> Secuencial s a
+-- b) en el informe
 
 -- c) Implemente la funcion return de tal forma que inyecte el argumento pasado como argumento, dejando el
 -- estado inicial intacto. Esto es, dado un estado inicial, el resultado debe ser el argumento pasado junto al
