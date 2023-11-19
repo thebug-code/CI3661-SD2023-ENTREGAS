@@ -64,11 +64,7 @@ analizarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
       (Just (ymin, ymax, isSorted), Nothing) -> Just (min x ymin, max x ymax, isSorted && x >= ymin)
       (Just (ymin, ymax, isSorted1), Just (zmin, zmax, isSorted2)) -> Just (min x (min ymin zmin), max x (max ymax zmax), isSorted1 && isSorted2 && x >= ymin && x <= zmin)
       
--- g) Para un tipo de datos mas general Gen a, con n constructores diferentes.
--- Si se quisiera crear una funcion plegarGen, con un comportamiento similar 
--- al de plegarArbolMB, la funcion deberia tomar como argumentos una funcion
--- por cada uno de los n constructores, demás del valor de tipo Gen a que se
--- desea plegar.
+-- g) en el informe
 
 -- h) Para el caso especial donde hay dos contructores data [a] = (:) a [a] | []. La funcion
 -- predefinida en el preludio de Haskell que tiene una firma y comportamiento similar a
