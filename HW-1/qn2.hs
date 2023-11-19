@@ -66,9 +66,7 @@ analizarArbolMB = plegarArbolMB transVacio transRamaM transRamaB
       
 -- g) en el informe
 
--- h) Para el caso especial donde hay dos contructores data [a] = (:) a [a] | []. La funcion
--- predefinida en el preludio de Haskell que tiene una firma y comportamiento similar a
--- al del implementar una funcion de plegado para el tipo propuesto es foldr: (a -> b -> b) -> b -> [a] -> b
+-- h) en el informe
 
 -- Test
 --main = do
