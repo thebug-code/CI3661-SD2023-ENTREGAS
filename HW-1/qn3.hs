@@ -24,11 +24,7 @@ newtype Secuencial s a = Secuencial (s -> (a,s))
 -- Queremos que nuestro tipo sea un monad, por lo que haremos una instancia para el
 -- instance Monad (Secuencial s) where ...
 
--- a) ¿Por que se tomo (Secuencial s) como la instancia para el monad y no simplemente Secuencial?
--- El tipo de Secuencial en terminos de kind es * -> * -> * (toma dos parámetros de tipo 's' y 'a'
--- y genera un tipo concreto) y el tipo de Monad es * -> * (toma un parámetro de tipo y genera un
--- tipo concreto). Al agregar el parámetro de tipo 's' a Secuencial, hacemos que el tipo de Secuencial
--- sea * -> * y por lo tanto, sea compatible con el tipo de Monad.
+-- a) en el informe
 
 -- b) Diga las firmas para las funciones return, >>=, >> y fail para el caso especial del monad (Secuencial s)
 -- return :: a -> Secuencial s a
@@ -48,3 +44,9 @@ instance Monad (Secuencial s) where
       let (resultado, nuevoEstado) = programa estadoInicial
         (Secuencial nuevoPrograma) = transformador resultado
       in nuevoPrograma nuevoEstado
+
+-- e) Demuestre las tres leyes monadicas aplicadas al tipo Secuencial s.
+-- Recuerde que las tres leyes monadicas son:
+-- Identidad izquierda: return a >>= h == h a
+-- Identidad derecha: m >>= return == m
+-- Asociatividad: (m >>= g) >>= h == m >>= (\x -> g x >>= h)
