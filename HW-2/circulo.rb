@@ -1,9 +1,4 @@
-# a) Defina la clase en cuestion, con el campo propuesto
-# b) Implemente setters y getters para el campo radio de Circulo.
-# c) Implemente un metodo initialize (constructor) para Circulo que
-# reciba un numero e inicialice el radio del circulo con dicho
-# numero. En caso de que el numero propuesto sea negativo, se debe
-# arrojar un error con el mensaje: 'Radio invalido'.
+# 1.
 
 class Circulo
   attr_accessor :radio
@@ -20,5 +15,25 @@ class Circulo
   # area del circulo
   def area
     Math::PI * @radio * @radio
+  end
+end
+
+# 2. 
+class Cilindro < Circulo
+  attr_accessor :altura
+
+  # constructor
+  def initialize(radio, altura)
+    if altura < 0
+      raise 'Altura invalida'
+    end
+    super(radio)
+
+    @altura = altura
+  end
+
+  # volumen del cilindro
+  def volumen
+    Math::PI * @radio * @radio * @altura
   end
 end
