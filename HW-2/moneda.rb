@@ -20,6 +20,10 @@ class Moneda
     send(coin_sym)
   end
 
+  def comparar(other)
+    other.compare_wth_other_coin(self)
+  end
+
   def compare_two_coins(c1, c2)
     if c1 > c2
       return :mayor
@@ -48,10 +52,6 @@ class Dolar < Moneda
     (@cnt * $USD_TO_BTC_EXR).round(2)
   end
 
-  def comparar(other)
-    other.compare_wth_other_coin(self)
-  end
-  
   def compare_wth_other_coin(coin)
     compare_two_coins(coin.dolares, @cnt)
   end
@@ -72,10 +72,6 @@ class Yen < Moneda
 
   def bitcoins
     (@cnt * $JPY_TO_BTC_EXR).round(2)
-  end
-
-  def comparar(other)
-    other.compare_wth_yen(self)
   end
 
   def compare_wth_other_coin(coin)
@@ -100,10 +96,6 @@ class Euro < Moneda
     (@cnt * $EUR_TO_BTC_EXR).round(2)
   end
 
-  def comparar(other)
-    other.compare_wth_other_coin(self)
-  end
-
   def compare_wth_other_coin(coin)
     compare_two_coins(coin.euros, @cnt)
   end
@@ -126,10 +118,6 @@ class Bolivar < Moneda
     @cnt * $VED_TO_BTC_EXR
   end
 
-  def comparar(other)
-    other.compare_wth_other_coin(self)
-  end
-
   def compare_wth_other_coin(coin)
     compare_two_coins(coin.bolivares, @cnt)
   end
@@ -150,10 +138,6 @@ class Bitcoin < Moneda
 
   def bolivares
     @cnt / $VED_TO_BTC_EXR
-  end
-
-  def comparar(other)
-    other.compare_wth_other_coin(self)
   end
 
   def compare_wth_other_coin(coin)
