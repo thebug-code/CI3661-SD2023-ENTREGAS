@@ -103,19 +103,19 @@ end
 
 class Bolivar < Moneda
   def dolares
-    @cnt / $USD_TO_VED_EXR
+    (@cnt / $USD_TO_VED_EXR).round(2)
   end
 
   def euros
-    @cnt / $EUR_TO_VED_EXR
+    (@cnt / $EUR_TO_VED_EXR).round(2)
   end
 
   def yens
-    @cnt * $VED_TO_JPY_EXR
+    (@cnt * $VED_TO_JPY_EXR).round(2)
   end
 
   def bitcoins
-    @cnt * $VED_TO_BTC_EXR
+    (@cnt * $VED_TO_BTC_EXR).round(2)
   end
 
   def compare_wth_other_coin(coin)
@@ -125,19 +125,19 @@ end
 
 class Bitcoin < Moneda
   def dolares
-    @cnt / $USD_TO_BTC_EXR
+    (@cnt / $USD_TO_BTC_EXR).round(2)
   end
 
   def euros
-    @cnt / $EUR_TO_BTC_EXR
+    (@cnt / $EUR_TO_BTC_EXR).round(2)
   end
 
   def yens
-    @cnt / $JPY_TO_BTC_EXR
+    (@cnt / $JPY_TO_BTC_EXR).round(2)
   end
 
   def bolivares
-    @cnt / $VED_TO_BTC_EXR
+    (@cnt / $VED_TO_BTC_EXR).round(2)
   end
 
   def compare_wth_other_coin(coin)
