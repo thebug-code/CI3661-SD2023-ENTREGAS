@@ -49,23 +49,11 @@ class Dolar < Moneda
   end
 
   def comparar(other)
-    other.compare_wth_dolar(self)
+    other.compare_wth_other_coin(self)
   end
-
-  def compare_wth_yen(yen)
-    compare_two_coins(yen.dolares, @cnt)
-  end
-
-  def compare_wth_euro(euro)
-    compare_two_coins(euro.dolares, @cnt)
-  end
-
-  def compare_wth_bolivar(bolivar)
-    compare_two_coins(bolivar.dolares, @cnt)
-  end
-
-  def compare_wth_bitcoin(bitcoin)
-    compare_two_coins(bitcoin.dolares, @cnt)
+  
+  def compare_wth_other_coin(coin)
+    compare_two_coins(coin.dolares, @cnt)
   end
 end
 
@@ -90,20 +78,8 @@ class Yen < Moneda
     other.compare_wth_yen(self)
   end
 
-  def compare_wth_dolar(dolar)
-    compare_two_coins(dolar.yens, @cnt)
-  end
-
-  def compare_wth_euro(euro)
-    compare_two_coins(euro.yens, @cnt)
-  end
-
-  def compare_wth_bolivar(bolivar)
-    compare_two_coins(bolivar.yens, @cnt)
-  end
-
-  def compare_wth_bitcoin(bitcoin)
-    compare_two_coins(bitcoin.yens, @cnt)
+  def compare_wth_other_coin(coin)
+    compare_two_coins(coin.yens, @cnt)
   end
 end
 
@@ -125,23 +101,11 @@ class Euro < Moneda
   end
 
   def comparar(other)
-    other.compare_wth_euro(self)
+    other.compare_wth_other_coin(self)
   end
 
-  def compare_wth_dolar(dolar)
-    compare_two_coins(dolar.euros, @cnt)
-  end
-
-  def compare_wth_yen(yen)
-    compare_two_coins(yen.euros, @cnt)
-  end
-
-  def compare_wth_bolivar(bolivar)
-    compare_two_coins(bolivar.euros, @cnt)
-  end
-
-  def compare_wth_bitcoin(bitcoin)
-    compare_two_coins(bitcoin.euros, @cnt)
+  def compare_wth_other_coin(coin)
+    compare_two_coins(coin.euros, @cnt)
   end
 end
 
@@ -163,23 +127,11 @@ class Bolivar < Moneda
   end
 
   def comparar(other)
-    other.compare_wth_bolivar(self)
+    other.compare_wth_other_coin(self)
   end
 
-  def compare_wth_dolar(dolar)
-    compare_two_coins(dolar.bolivares, @cnt)
-  end
-
-  def compare_wth_yen(yen)
-    compare_two_coins(yen.bolivares, @cnt)
-  end
-
-  def compare_wth_euro(euro)
-    compare_two_coins(euro.bolivares, @cnt)
-  end
-
-  def compare_wth_bitcoin(bitcoin)
-    compare_two_coins(bitcoin.bolivares, @cnt)
+  def compare_wth_other_coin(coin)
+    compare_two_coins(coin.bolivares, @cnt)
   end
 end
 
@@ -201,23 +153,11 @@ class Bitcoin < Moneda
   end
 
   def comparar(other)
-    other.compare_wth_bitcoin(self)
+    other.compare_wth_other_coin(self)
   end
 
-  def compare_wth_dolar(dolar)
-    compare_two_coins(dolar.bitcoins, @cnt)
-  end
-
-  def compare_wth_yen(yen)
-    compare_two_coins(yen.bitcoins, @cnt)
-  end 
-
-  def compare_wth_euro(euro)
-    compare_two_coins(euro.bitcoins, @cnt)
-  end
-
-  def compare_wth_bolivar(bolivar)
-    compare_two_coins(bolivar.bitcoins, @cnt)
+  def compare_wth_other_coin(coin)
+    compare_two_coins(coin.bitcoins, @cnt)
   end
 end
 
