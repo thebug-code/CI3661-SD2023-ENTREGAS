@@ -10,3 +10,6 @@ def producto_cartesiano(a, b)
     end
   end
 end
+
+# Ejemplo de uso:
+# producto_cartesiano([:a, :b, :c], [4, 5]) {|x| p x}
