@@ -1,8 +1,8 @@
-% Define la funcion up/2
+% Definicion de los numeros de Church
 up(X, up(Y)) :- up(X, Y).
-
-% Caso base
 up(_, *).
+
+% Calculadora para numeros de Church
 
 % a.
 
@@ -19,5 +19,5 @@ resta(up(X), up(Y), Z) :- resta(X, Y, Z).
 % c.
 
 % Define el predicado mult/3
-mult(*, _, *).
-mult(up(X), Y, Z) :- mult(X, Y, W), sum(W, Y, Z).
+producto(*, _, *).
+producto(up(X), Y, Z) :- mult(X, Y, W), sum(W, Y, Z).
