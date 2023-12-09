@@ -35,7 +35,7 @@ existeOtroCamino(A,B,C) :-
     alcanzable(C, C1), 
     alcanzable(C1, A), 
     alcanzable(C1, B), 
-    not(C = C1).
+    C \= C1.
 
 % d.
 
