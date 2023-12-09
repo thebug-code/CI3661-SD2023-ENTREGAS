@@ -1,20 +1,25 @@
 % Hechos que representan los arcos del grafo
 % arco(X, Y) significa que existe un arco desde X hasta Y
-arco(a, b).
-arco(b, c).
-arco(c, d).
+arco(1,3).
+arco(3,4).
+arco(3,5).
+arco(1,5).
 
 % a.
 
 % A es hermano de B si existe un C tal que C es arco de A y B
-hermano(A, B) :- arco(C, A), arco(C, B), A \= B.
+hermano(A, B) :-
+    arco(C, A),
+    arco(C, B),
+    A \= B.
 
 % b.
 
 % B es alcanzable desde A si existe un arco de A a B, o si existe un C
 % tal que existe un arco de A a C y B es alcanzable desde C
-alcanzable(A, B) :- arco(A, B), \+ alcanzable(A, B).
-alcanzable(A, B) :- arco(A, C), alcanzable(C, B), \+ alcanzable(A, B).
+alcanzable(A, A).
+alcanzable(A, B) :- arco(A, B).
+alcanzable(A, B) :- arco(A, C), alcanzable(C, B).
 
 % c.
 
@@ -23,7 +28,14 @@ alcanzable(A, B) :- arco(A, C), alcanzable(C, B), \+ alcanzable(A, B).
 lca(A, B, C) :-
     alcanzable(C, A),
     alcanzable(C, B),
-    not((alcanzable(C, C1), alcanzable(C1, A), alcanzable(C1, B))).
+    not(existeOtroCamino(A, B, C)),
+    !.
+
+existeOtroCamino(A,B,C) :-
+    alcanzable(C, C1), 
+    alcanzable(C1, A), 
+    alcanzable(C1, B), 
+    not(C = C1).
 
 % d.
 
